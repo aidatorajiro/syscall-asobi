@@ -2,6 +2,8 @@
 
 assembly is fun!
 
+MacOS 10.14 supported.
+
 # shell script
 This repository contains these shell scripts.
 - nasm.sh - Compile Wine executable using `nasm.exe` and `GoLink.exe`
