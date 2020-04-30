@@ -23,6 +23,7 @@ This repository contains these executables:
 - GoLink.exe - GoLink linker (C) Jeremy Gordon 1999-2019
 
 - nasm.exe - NASM compiler (C) 1996-2015 The NASM development team
+
   **Conditions on redistributing NASM**
 
   Copyright 1996-2015 The NASM development team
