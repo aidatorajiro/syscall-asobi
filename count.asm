@@ -100,7 +100,7 @@ count_text_num:
 count_id equ 154
 
 count_handle:
-  db 0
+  dd 0
 
 app_path:
   db      '/Applications/Safari.app/Contents/MacOS/Safari', 0
@@ -299,6 +299,12 @@ func_win_callback: ; handle, message, param, lparam
     jmp .flag_not_safari
 
     .flag_safari:
+    
+    push    0
+    push    app_path
+    push    app_path
+    push    0
+    call   _MessageBoxA@16
 
     push    ebp
     mov ebp, esp
