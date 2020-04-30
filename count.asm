@@ -152,6 +152,10 @@ window_class_data:
 section .text
 
 _main:
+  ; |                |
+  ; | INITialization |
+  ; |                |
+
   mov eax, [esp + 4]
   mov [win_instance], eax
   
@@ -195,12 +199,9 @@ _main:
   mov [handle_window], eax
   call func_err_test
 
-  ; push 5 ; show window param
-  ; push dword [handle_window]
-  ; call _ShowWindow@8
-
-  ; push dword [handle_window]
-  ; call _UpdateWindow@4
+  ; |               |
+  ; | infinite loop |
+  ; |               |
   
 infinite:
   xor eax, eax
@@ -231,6 +232,10 @@ infinite_exit:
   call    _ExitProcess@4
   hlt
 
+; |                           |
+; | Windows callback function |
+; |                           |
+
 func_win_callback: ; handle, message, param, lparam
   mov eax, [esp + 4]
   mov [temp_args.hwin], eax ; hwin
@@ -244,9 +249,9 @@ func_win_callback: ; handle, message, param, lparam
   mov eax, [esp + 16]
   mov [temp_args.lpar], eax ; lpar
 
+  ; |        |
   ; | CREATE |
-  ; | CREATE |
-  ; | CREATE |
+  ; |        |
   
   cmp dword [temp_args.mess], 1 ; if create
   je .cond_m1
@@ -254,12 +259,14 @@ func_win_callback: ; handle, message, param, lparam
 
   .cond_m1:
 
+    ; get window long
     push -6
     push dword [temp_args.hwin]
     call _GetWindowLongA@8
     
     mov [window_long], eax
 
+    ; create safari buttton
     push 0
     push dword [window_long]
     push safari_id
@@ -275,6 +282,7 @@ func_win_callback: ; handle, message, param, lparam
     
     call _CreateWindowExA@48
     
+    ; create exit buttton
     push 0
     push dword [window_long]
     push exit_id
@@ -290,6 +298,7 @@ func_win_callback: ; handle, message, param, lparam
     
     call _CreateWindowExA@48
 
+    ; create entropy buttton
     push 0
     push dword [window_long]
     push entropy_id
@@ -305,15 +314,17 @@ func_win_callback: ; handle, message, param, lparam
     
     call _CreateWindowExA@48
 
+    ; create entropy text
     call func_regenerate_entropy
 
+    ; create count text & button
     call func_redraw_count_btn
   
   .cond_m1_r:
 
+  ; |         |
   ; | COMMAND |
-  ; | COMMAND |
-  ; | COMMAND |
+  ; |         |
 
   cmp dword [temp_args.mess], 0x111 ; if command
   je .cond_m2
@@ -321,6 +332,7 @@ func_win_callback: ; handle, message, param, lparam
 
   .cond_m2:
 
+    ; exit button pressed
     cmp word [temp_args.wpar], exit_id ; if exit_id
     je .flag_exit
     jmp .flag_not_exit
@@ -334,6 +346,7 @@ func_win_callback: ; handle, message, param, lparam
 
     .flag_not_exit:
 
+    ; safari button pressed
     cmp word [temp_args.wpar], safari_id ; if safari_id
     je .flag_safari
     jmp .flag_not_safari
@@ -372,6 +385,7 @@ func_win_callback: ; handle, message, param, lparam
 
     .flag_not_safari:
 
+    ; count button pressed
     cmp word [temp_args.wpar], count_id ; if count_id
     je .flag_count
     jmp .flag_not_count
@@ -387,6 +401,7 @@ func_win_callback: ; handle, message, param, lparam
 
     .flag_not_count:
 
+    ; entropy button pressed
     cmp word [temp_args.wpar], entropy_id ; if count_id
     je .flag_entropy
     jmp .flag_not_entropy
@@ -399,9 +414,9 @@ func_win_callback: ; handle, message, param, lparam
   
   .cond_m2_r:
 
+  ; |         |
   ; | DEFAULT |
-  ; | DEFAULT |
-  ; | DEFAULT |
+  ; |         |
   
     push dword [temp_args.lpar]
     push dword [temp_args.wpar]
@@ -411,6 +426,11 @@ func_win_callback: ; handle, message, param, lparam
     call _DefWindowProcA@16
     ret
 
+; |                |
+; | misc functions |
+; |                |
+
+; redraw entropy text
 func_regenerate_entropy:
   cmp dword [entropy_num_handle],0
   je .create
@@ -454,6 +474,7 @@ func_regenerate_entropy:
 
   mov [entropy_num_handle], eax
 
+; redraw count button and text
 func_redraw_count_btn:
   cmp dword [count_handle],0
   je .create
@@ -504,6 +525,7 @@ func_redraw_count_btn:
 
   ret
 
+; print current error via MessageBox
 func_print_err:
   push eax
   push ebx
@@ -523,6 +545,7 @@ func_print_err:
   pop eax
   ret
 
+; chack if handle exists and print debug info via MessageBox
 func_err_test: ; eax = handle
   cmp eax, 0
   je cond_whnd_t
@@ -544,6 +567,7 @@ func_err_test: ; eax = handle
   cond_whnd_r:
     ret
 
+; int to str
 func_int_to_str: ; eax = number, ebx = pointer to string
   push eax
   push ebx
