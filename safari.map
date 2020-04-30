@@ -1,0 +1,45 @@
+ safari
+
+ Timestamp is 5ea84cc8 (Wed Apr 29 00:33:28 2020)
+
+ Preferred load address is 00400000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00000096H .text                   CODE
+ 0002:00000000 00000010H .idata$5                DATA
+ 0002:00000010 00000000H .edata                  DATA
+ 0002:00000010 00000028H .idata$2                DATA
+ 0002:00000038 00000014H .idata$3                DATA
+ 0002:0000004c 00000010H .idata$4                DATA
+ 0002:0000005c 00000036H .idata$6                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       ___guard_flags             00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_count   00000000     <absolute>
+ 0001:00000000       _main                      00401000     safari.obj
+ 0001:0000008a       _ExitProcess@4             0040108a f   Kernel32:kernel32.dll
+ 0001:00000090       _MessageBoxA@16            00401090 f   User32:user32.dll
+ 0002:00000000       __imp__ExitProcess@4       00402000     Kernel32:kernel32.dll
+ 0002:00000004       \177kernel32_NULL_THUNK_DATA 00402004     Kernel32:kernel32.dll
+ 0002:00000008       __imp__MessageBoxA@16      00402008     User32:user32.dll
+ 0002:0000000c       \177user32_NULL_THUNK_DATA 0040200c     User32:user32.dll
+ 0002:00000010       __IMPORT_DESCRIPTOR_kernel32 00402010     Kernel32:kernel32.dll
+ 0002:00000024       __IMPORT_DESCRIPTOR_user32 00402024     User32:user32.dll
+ 0002:00000038       __NULL_IMPORT_DESCRIPTOR   00402038     Kernel32:kernel32.dll
+
+ entry point at        0001:00000000
+
+ Static symbols
+
+ 0001:00000038       message                    00401038     safari.obj
+ 0001:00000052       app_path                   00401052     safari.obj
+ 0001:00000052       message_end                00401052     safari.obj
+ 0001:00000081       argv                       00401081     safari.obj
+ 0001:00000081       app_path_end               00401081     safari.obj
+ 0001:00000089       argv_end                   00401089     safari.obj
+ 0002:0000006a       .idata$6                   0040206a     Kernel32:kernel32.dll
+ 0002:00000086       .idata$6                   00402086     User32:user32.dll

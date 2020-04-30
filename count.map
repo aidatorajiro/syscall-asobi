@@ -1,0 +1,98 @@
+ count
+
+ Timestamp is 5eaa7b53 (Thu Apr 30 16:16:35 2020)
+
+ Preferred load address is 00400000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00000204H .text                   CODE
+ 0002:00000000 00000038H .idata$5                DATA
+ 0002:00000038 00000000H .edata                  DATA
+ 0002:00000038 00000028H .idata$2                DATA
+ 0002:00000060 00000014H .idata$3                DATA
+ 0002:00000074 00000038H .idata$4                DATA
+ 0002:000000ac 000000e0H .idata$6                DATA
+ 0003:00000000 00000130H .data                   DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       ___guard_flags             00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_count   00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   00000000     <absolute>
+ 0001:00000000       _main                      00401000     count.obj
+ 0001:000001bc       _ExitProcess@4             004011bc f   Kernel32:kernel32.dll
+ 0001:000001c2       _GetLastError@0            004011c2 f   Kernel32:kernel32.dll
+ 0001:000001c8       _MessageBoxA@16            004011c8 f   User32:user32.dll
+ 0001:000001ce       _CreateWindowExA@48        004011ce f   User32:user32.dll
+ 0001:000001d4       _GetMessageA@16            004011d4 f   User32:user32.dll
+ 0001:000001da       _TranslateMessage@4        004011da f   User32:user32.dll
+ 0001:000001e0       _DispatchMessageA@4        004011e0 f   User32:user32.dll
+ 0001:000001e6       _RegisterClassExA@4        004011e6 f   User32:user32.dll
+ 0001:000001ec       _DefWindowProcA@16         004011ec f   User32:user32.dll
+ 0001:000001f2       _LoadIconA@8               004011f2 f   User32:user32.dll
+ 0001:000001f8       _LoadCursorA@8             004011f8 f   User32:user32.dll
+ 0001:000001fe       _GetWindowLongA@8          004011fe f   User32:user32.dll
+ 0002:00000000       __imp__GetLastError@0      00402000     Kernel32:kernel32.dll
+ 0002:00000004       __imp__ExitProcess@4       00402004     Kernel32:kernel32.dll
+ 0002:00000008       \177kernel32_NULL_THUNK_DATA 00402008     Kernel32:kernel32.dll
+ 0002:0000000c       __imp__MessageBoxA@16      0040200c     User32:user32.dll
+ 0002:00000010       __imp__CreateWindowExA@48  00402010     User32:user32.dll
+ 0002:00000014       __imp__GetMessageA@16      00402014     User32:user32.dll
+ 0002:00000018       __imp__TranslateMessage@4  00402018     User32:user32.dll
+ 0002:0000001c       __imp__DispatchMessageA@4  0040201c     User32:user32.dll
+ 0002:00000020       __imp__RegisterClassExA@4  00402020     User32:user32.dll
+ 0002:00000024       __imp__DefWindowProcA@16   00402024     User32:user32.dll
+ 0002:00000028       __imp__LoadIconA@8         00402028     User32:user32.dll
+ 0002:0000002c       __imp__LoadCursorA@8       0040202c     User32:user32.dll
+ 0002:00000030       __imp__GetWindowLongA@8    00402030     User32:user32.dll
+ 0002:00000034       \177user32_NULL_THUNK_DATA 00402034     User32:user32.dll
+ 0002:00000038       __IMPORT_DESCRIPTOR_kernel32 00402038     Kernel32:kernel32.dll
+ 0002:0000004c       __IMPORT_DESCRIPTOR_user32 0040204c     User32:user32.dll
+ 0002:00000060       __NULL_IMPORT_DESCRIPTOR   00402060     Kernel32:kernel32.dll
+
+ entry point at        0001:00000000
+
+ Static symbols
+
+ 0001:00000092       infinite                   00401092     count.obj
+ 0001:000000c8       infinite_exit              004010c8     count.obj
+ 0001:000000d0       func_win_callback          004010d0     count.obj
+ 0001:000000ff       func_win_callback.cond_m1  004010ff     count.obj
+ 0001:00000135       func_win_callback.cond_m1_r 00401135     count.obj
+ 0001:00000153       func_err_test              00401153     count.obj
+ 0001:0000015b       cond_whnd_t                0040115b     count.obj
+ 0001:0000017f       cond_whnd_f                0040117f     count.obj
+ 0001:00000194       cond_whnd_r                00401194     count.obj
+ 0001:00000196       func_int_to_str            00401196     count.obj
+ 0001:000001a1       func_int_to_str.loop       004011a1     count.obj
+ 0002:000000ca       .idata$6                   004020ca     Kernel32:kernel32.dll
+ 0002:00000180       .idata$6                   00402180     User32:user32.dll
+ 0003:00000000       winmsg                     00403000     count.obj
+ 0003:0000001c       divisor_table              0040301c     count.obj
+ 0003:00000048       temp_str                   00403048     count.obj
+ 0003:00000053       temp_args                  00403053     count.obj
+ 0003:00000053       temp_args.hwin             00403053     count.obj
+ 0003:00000057       temp_args.mess             00403057     count.obj
+ 0003:0000005b       temp_args.wpar             0040305b     count.obj
+ 0003:0000005f       temp_args.lpar             0040305f     count.obj
+ 0003:00000063       count_int                  00403063     count.obj
+ 0003:00000067       handle_window              00403067     count.obj
+ 0003:0000006b       handle_button              0040306b     count.obj
+ 0003:0000006f       win_instance               0040306f     count.obj
+ 0003:00000073       window_class               00403073     count.obj
+ 0003:0000007f       window_class_end           0040307f     count.obj
+ 0003:0000007f       window_name                0040307f     count.obj
+ 0003:0000008a       window_name_end            0040308a     count.obj
+ 0003:0000008a       message                    0040308a     count.obj
+ 0003:000000a4       message_ari                004030a4     count.obj
+ 0003:000000a9       message_dame               004030a9     count.obj
+ 0003:000000ae       btn_class                  004030ae     count.obj
+ 0003:000000b5       btn_text                   004030b5     count.obj
+ 0003:000000c9       app_path                   004030c9     count.obj
+ 0003:000000f8       app_argv                   004030f8     count.obj
+ 0003:00000100       window_class_data          00403100     count.obj
+ 0003:00000114       window_class_data.instance 00403114     count.obj
+ 0003:00000118       window_class_data.icon     00403118     count.obj
+ 0003:0000011c       window_class_data.cursor   0040311c     count.obj
