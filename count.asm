@@ -17,6 +17,10 @@ extern  _GetWindowLongA@8
 extern  _CreateWindowExA@48
 extern  _DestroyWindow@4
 
+SYS_fork equ 2
+SYS_execve equ 59
+SYS_getentropy equ 500
+
 section .data
 
 winmsg:
@@ -358,7 +362,7 @@ func_win_callback: ; handle, message, param, lparam
     push 0
     push app_argv
     push app_path
-    mov     eax, 2
+    mov     eax, SYS_fork
     sub     esp, 4
     int     80h
     add esp, 16
@@ -375,7 +379,7 @@ func_win_callback: ; handle, message, param, lparam
     push 0
     push app_argv
     push app_path
-    mov     eax, 59
+    mov     eax, SYS_execve
     sub     esp, 4
     int     80h
     add esp, 16
@@ -447,7 +451,7 @@ func_regenerate_entropy:
   mov ebp, esp
   push 4
   push entropy_num_int
-  mov     eax, 500
+  mov     eax, SYS_getentropy
   sub     esp, 4
   int     80h
   add esp, 12
