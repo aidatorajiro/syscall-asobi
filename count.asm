@@ -82,6 +82,9 @@ message_dame:
 btn_class:
   db      'BUTTON', 0
 
+static_class:
+  db      'STATIC', 0
+
 safari_text:
   db      '‚³‚Ó‚Ÿ‚è', 0
 
@@ -101,6 +104,9 @@ count_text_num:
 count_id equ 154
 
 count_handle:
+  dd 0
+
+count_text_handle:
   dd 0
 
 app_path:
@@ -369,6 +375,8 @@ func_redraw_count_btn:
   .del:
   push dword [count_handle]
   call _DestroyWindow@4
+  push dword [count_text_handle]
+  call _DestroyWindow@4
   .create:
   push 0
   push dword [window_long]
@@ -382,10 +390,27 @@ func_redraw_count_btn:
   push count_text
   push btn_class
   push 0
-  
+
   call _CreateWindowExA@48
 
   mov [count_handle], eax
+
+  push 0
+  push dword [window_long]
+  push 0
+  push dword [temp_args.hwin]
+  push 30
+  push 200
+  push 300
+  push 300
+  push 0x50000000
+  push count_text_num
+  push static_class
+  push 0
+  
+  call _CreateWindowExA@48
+
+  mov [count_text_handle], eax
 
   ret
 
