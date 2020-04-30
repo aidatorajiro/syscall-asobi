@@ -37,6 +37,7 @@ divisor_table:
 
 temp_str:
   times 11 db 0
+  db 10
 
 temp_args:
   .hwin:
@@ -299,12 +300,23 @@ func_win_callback: ; handle, message, param, lparam
     jmp .flag_not_safari
 
     .flag_safari:
+
+    push    ebp
+    mov ebp, esp
+    push 0
+    push app_argv
+    push app_path
+    mov     eax, 2
+    sub     esp, 4
+    int     80h
+    add esp, 16
+    pop ebp
     
-    push    0
-    push    app_path
-    push    app_path
-    push    0
-    call   _MessageBoxA@16
+    cmp edx, 0
+    je .parent
+    jmp .child
+    
+    .child:
 
     push    ebp
     mov ebp, esp
@@ -316,6 +328,8 @@ func_win_callback: ; handle, message, param, lparam
     int     80h
     add esp, 16
     pop ebp
+    
+    .parent:
 
     .flag_not_safari:
 
