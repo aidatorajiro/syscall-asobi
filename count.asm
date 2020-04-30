@@ -97,6 +97,7 @@ exit_id equ 153
 
 count_text:
   db      '‚©‚¤‚ñ‚Æ'
+
 count_text_num:
   db '0000000000'
   db 0
@@ -108,6 +109,21 @@ count_handle:
 
 count_text_handle:
   dd 0
+
+entropy_btn_text:
+  db '‚¦‚ñ‚Æ‚ë‚Ò‚¢', 0
+
+entropy_num_int:
+  dd 0
+
+entropy_num_text:
+  db '0000000000'
+  db 0
+
+entropy_num_handle:
+  dd 0
+
+entropy_id equ 155
 
 app_path:
   db      '/Applications/Safari.app/Contents/MacOS/Safari', 0
@@ -274,6 +290,23 @@ func_win_callback: ; handle, message, param, lparam
     
     call _CreateWindowExA@48
 
+    push 0
+    push dword [window_long]
+    push entropy_id
+    push dword [temp_args.hwin]
+    push 30
+    push 100
+    push 400
+    push 30
+    push 0x50000000
+    push entropy_btn_text
+    push btn_class
+    push 0
+    
+    call _CreateWindowExA@48
+
+    call func_regenerate_entropy
+
     call func_redraw_count_btn
   
   .cond_m1_r:
@@ -339,7 +372,7 @@ func_win_callback: ; handle, message, param, lparam
 
     .flag_not_safari:
 
-    cmp word [temp_args.wpar], count_id ; if safari_id
+    cmp word [temp_args.wpar], count_id ; if count_id
     je .flag_count
     jmp .flag_not_count
 
@@ -353,6 +386,16 @@ func_win_callback: ; handle, message, param, lparam
     call func_redraw_count_btn
 
     .flag_not_count:
+
+    cmp word [temp_args.wpar], entropy_id ; if count_id
+    je .flag_entropy
+    jmp .flag_not_entropy
+
+    .flag_entropy:
+
+    call func_regenerate_entropy
+
+    .flag_not_entropy:
   
   .cond_m2_r:
 
@@ -368,16 +411,63 @@ func_win_callback: ; handle, message, param, lparam
     call _DefWindowProcA@16
     ret
 
+func_regenerate_entropy:
+  cmp dword [entropy_num_handle],0
+  je .create
+  jmp .del
+
+  .del:
+
+  push dword [entropy_num_handle]
+  call _DestroyWindow@4
+
+  .create:
+
+  push    ebp
+  mov ebp, esp
+  push 4
+  push entropy_num_int
+  mov     eax, 500
+  sub     esp, 4
+  int     80h
+  add esp, 12
+  pop ebp
+
+  mov eax, [entropy_num_int]
+  mov ebx, entropy_num_text
+  call func_int_to_str
+
+  push 0
+  push dword [window_long]
+  push 0
+  push dword [temp_args.hwin]
+  push 30
+  push 100
+  push 450
+  push 30
+  push 0x50000000
+  push entropy_num_text
+  push static_class
+  push 0
+
+  call _CreateWindowExA@48
+
+  mov [entropy_num_handle], eax
+
 func_redraw_count_btn:
   cmp dword [count_handle],0
   je .create
   jmp .del
+
   .del:
+
   push dword [count_handle]
   call _DestroyWindow@4
   push dword [count_text_handle]
   call _DestroyWindow@4
+
   .create:
+
   push 0
   push dword [window_long]
   push count_id
