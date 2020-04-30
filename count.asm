@@ -389,24 +389,32 @@ func_redraw_count_btn:
 
   ret
 
-func_err_test: ; eax = handle
+func_print_err:
+  push eax
   push ebx
+  
+  call   _GetLastError@0
+  
+  mov ebx, temp_str
+  call func_int_to_str
+  
+  push    0
+  push    message_dame
+  push    temp_str
+  push    0
+  call   _MessageBoxA@16
+
+  pop ebx
+  pop eax
+  ret
+
+func_err_test: ; eax = handle
   cmp eax, 0
   je cond_whnd_t
   jmp cond_whnd_f
 
   cond_whnd_t:
-    call   _GetLastError@0
-    
-    mov ebx, temp_str
-    call func_int_to_str
-    
-    push    0
-    push    message_dame
-    push    temp_str
-    push    0
-    call   _MessageBoxA@16
-    
+    call func_print_err
     jmp cond_whnd_r
     
   cond_whnd_f:
@@ -419,7 +427,6 @@ func_err_test: ; eax = handle
     jmp cond_whnd_r
 
   cond_whnd_r:
-    pop ebx
     ret
 
 func_int_to_str: ; eax = number, ebx = pointer to string
