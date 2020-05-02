@@ -1,6 +1,6 @@
 # wine asm asobi - Calling native systemcall inside MacOS 32bit Wine
 
-assembly is fun!
+assembly black magic is fun!
 
 MacOS 10.14 supported.
 
